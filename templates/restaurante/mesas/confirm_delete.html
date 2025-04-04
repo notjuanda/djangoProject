@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'restaurante/base.html' %}
+{% block title %}Eliminar Mesa{% endblock %}
+{% block content %}
+<h2>¿Eliminar la {{ object }}?</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+  <a href="{% url 'mesa_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

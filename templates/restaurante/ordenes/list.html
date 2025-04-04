@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'restaurante/base.html' %}
+{% block title %}Lista de Órdenes{% endblock %}
+{% block content %}
+<h2>Lista de Órdenes</h2>
+<div class="text-end mb-3">
+  <a class="btn btn-primary" href="{% url 'orden_create' %}">Crear Orden</a>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Fecha/Hora</th>
+      <th>Estado</th>
+      <th>Mesa</th>
+      <th>Mesero</th>
+      <th>Cliente</th>
+      <th>Platos</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for orden in object_list %}
+      <tr>
+        <td>{{ orden.id }}</td>
+        <td>{{ orden.fechaHora }}</td>
+        <td>{{ orden.estado }}</td>
+        <td>Mesa {{ orden.mesa.numero }}</td>
+        <td>
+          {% if orden.mesero %}
+            {{ orden.mesero.nombre }} {{ orden.mesero.apellido }}
+          {% else %}
+            -
+          {% endif %}
+        </td>
+        <td>
+          {% if orden.cliente %}
+            {{ orden.cliente.nombre }} ({{ orden.cliente.nit }})
+          {% else %}
+            -
+          {% endif %}
+        </td>
+        <td>
+          {% for p in orden.platos.all %}
+            <span class="badge bg-info">{{ p.nombre }}</span>
+          {% endfor %}
+        </td>
+        <td>
+          <a href="{% url 'orden_edit' orden.id %}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{% url 'orden_delete' orden.id %}" class="btn btn-sm btn-danger">Borrar</a>
+
+          {% if orden.estado == 'abierto' %}
+            <a href="{% url 'orden_pagar' orden.id %}" class="btn btn-sm btn-info">Pagar</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'restaurante/base.html' %}
+{% block title %}Lista de Meseros{% endblock %}
+{% block content %}
+<h2>Lista de Meseros</h2>
+<div class="text-end mb-3">
+  <a class="btn btn-primary" href="{% url 'mesero_create' %}">Crear Mesero</a>
+</div>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Teléfono</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for mesero in object_list %}
+    <tr>
+      <td>{{ mesero.id }}</td>
+      <td>{{ mesero.nombre }}</td>
+      <td>{{ mesero.apellido }}</td>
+      <td>{{ mesero.telefono }}</td>
+      <td>
+        <a href="{% url 'mesero_edit' mesero.id %}" class="btn btn-sm btn-warning">Editar</a>
+        <a href="{% url 'mesero_delete' mesero.id %}" class="btn btn-sm btn-danger">Borrar</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

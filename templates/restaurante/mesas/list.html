@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'restaurante/base.html' %}
+{% block title %}Lista de Mesas{% endblock %}
+{% block content %}
+<h2>Lista de Mesas</h2>
+<div class="text-end mb-3">
+  <a class="btn btn-primary" href="{% url 'mesa_create' %}">Crear Mesa</a>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Número</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for mesa in object_list %}
+      <tr>
+        <td>{{ mesa.id }}</td>
+        <td>Mesa {{ mesa.numero }}</td>
+        <td>
+          <a href="{% url 'mesa_edit' mesa.id %}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{% url 'mesa_delete' mesa.id %}" class="btn btn-sm btn-danger">Borrar</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

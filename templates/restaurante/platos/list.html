@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'restaurante/base.html' %}
+{% block title %}Lista de Platos{% endblock %}
+{% block content %}
+<h2>Lista de Platos</h2>
+<div class="text-end mb-3">
+  <a class="btn btn-primary" href="{% url 'plato_create' %}">Crear Plato</a>
+</div>
 
-</body>
-</html>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for plato in object_list %}
+      <tr>
+        <td>{{ plato.id }}</td>
+        <td>{{ plato.nombre }}</td>
+        <td>{{ plato.descripcion }}</td>
+        <td>
+          <a href="{% url 'plato_edit' plato.id %}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{% url 'plato_delete' plato.id %}" class="btn btn-sm btn-danger">Borrar</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'restaurante/base.html' %}
+{% block title %}Pagar Orden{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<div class="container mt-4">
+  <h2>Pagar Orden</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Pagar y Cerrar Orden</button>
+    <a href="{% url 'orden_list' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

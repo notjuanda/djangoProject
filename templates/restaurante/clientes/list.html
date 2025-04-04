@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'restaurante/base.html' %}
+{% block title %}Lista de Clientes{% endblock %}
+{% block content %}
+<h2>Lista de Clientes</h2>
+<div class="text-end mb-3">
+  <a class="btn btn-primary" href="{% url 'cliente_create' %}">Crear Cliente</a>
+</div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>NIT</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cliente in object_list %}
+      <tr>
+        <td>{{ cliente.id }}</td>
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.nit }}</td>
+        <td>
+          <a href="{% url 'cliente_edit' cliente.id %}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{% url 'cliente_delete' cliente.id %}" class="btn btn-sm btn-danger">Borrar</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
