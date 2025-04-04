@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 
-# Importa tus otros modelos (ajusta el nombre de las rutas si es distinto)
 from .mesero import Mesero
 from .cliente import Cliente
 from .mesa import Mesa

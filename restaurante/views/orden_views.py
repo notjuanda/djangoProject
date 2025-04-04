@@ -3,7 +3,6 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
 
-# Importa los modelos
 from ..models.orden import Orden
 from ..models.cliente import Cliente
 

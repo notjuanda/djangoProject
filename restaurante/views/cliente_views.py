@@ -1,4 +1,3 @@
-# restaurante/views/cliente_views.py
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from ..models.cliente import Cliente
